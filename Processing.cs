@@ -18,7 +18,12 @@ namespace ImageProcessingInit
         {
             return "#" + c.R.ToString("X2") + c.G.ToString("X2") + c.B.ToString("X2");
         }
-       
+        public static string ConvertToHexInt(int c)
+        {
+            return "#" + c.ToString("X2");
+        }
+
+
         public static bool ConvertImageToHex(Bitmap b)
         {
             string str;
@@ -38,7 +43,7 @@ namespace ImageProcessingInit
         public static bool ConvertToGrayScale(Bitmap b)
         {
             string str;
-            StreamWriter sw = new StreamWriter("gray.txt");
+            StreamWriter sw = new StreamWriter("gray2.txt");
             for (int i = 0; i < b.Width; i++)
             
                 for (int j = 0; j < b.Height; j++)
@@ -53,10 +58,12 @@ namespace ImageProcessingInit
                     g1 = gray;
                     
                     b.SetPixel(i, j, Color.FromArgb(r1, g1, b1));
-                    str = Processing.ConvertToHex(Color.FromArgb(r1, g1, b1));
-                    sw.WriteLine(str);
-                        
-                    
+                    str = Processing.ConvertToHexInt(gray);
+                    byte[] bytes = Encoding.ASCII.GetBytes(str);
+                    foreach(byte element in bytes)
+                    {
+                        sw.WriteLine(element);
+                    }
                 }
        
             return true;

@@ -57,5 +57,10 @@ namespace ImageProcessingInit
             }
         
         }
+
+        private void originalImage_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
